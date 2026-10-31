@@ -46,9 +46,9 @@ function ProtectedDashboard() {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/auth/me", {
-      credentials: "include",
-    })
+   fetch(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
+    credentials: "include",
+})
       .then((response) => {
         setAuthenticated(response.ok);
       })
