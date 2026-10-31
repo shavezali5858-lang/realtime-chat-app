@@ -34,7 +34,8 @@ app.use(cookieparser())
 const allowedOrigins = [
   "http://localhost:5173",
   "https://realtime-chat-app-henna-two-30.vercel.app",
-  "https://realtime-chat-8gl79ahyu-shavez.vercel.app"
+  "https://realtime-chat-8gl79ahyu-shavez.vercel.app",
+  "https://realtime-chat-ptfjys4i0-shavez.vercel.app"
 ];
 
 app.use(cors({
