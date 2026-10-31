@@ -75,13 +75,14 @@ const sendImage = async () => {
         const formData = new FormData();
         formData.append("image", selectedImage);
 
-        const response = await fetch(
-            "http://localhost:8000/api/images/upload",
-            {
-                method: "POST",
-                body: formData
-            }
-        );
+       
+    const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/images/upload`,
+        {
+            method: "POST",
+            body: formData
+        }
+    );
 
         const data = await response.json();
 
@@ -306,9 +307,9 @@ useEffect(() => {
 
   const fetchConversations = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/private-messages/conversations/${encodeURIComponent(username)}`
-      );
+    const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/private-messages/conversations/${encodeURIComponent(username)}`
+);
 
       if (!response.ok) {
         throw new Error("Failed to fetch conversations");
@@ -374,14 +375,13 @@ useEffect(() => {
 useEffect(() => {
   const fetchUser = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:8000/api/auth/me",
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-
+     const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/auth/me`,
+    {
+        method: "GET",
+        credentials: "include",
+    }
+);
       if (!response.ok) {
         console.log("Unable to fetch user details");
         return;
@@ -405,13 +405,13 @@ setUsername(data.user.username);
 
 const handleLogout = async () => {
   try {
-    const response = await fetch(
-      "http://localhost:8000/api/auth/logout",
-      {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/auth/logout`,
+    {
         method: "POST",
         credentials: "include",
-      }
-    );
+    }
+);
 
     if (!response.ok) {
       throw new Error("Logout failed");
