@@ -31,19 +31,24 @@ app.use(cookieparser())
 //     credentials:true,
 
 // }))
+
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://realtime-chat-app-henna-two-30.vercel.app",
- 
+  "https://realtime-chat-xlstbcqc1-shavez.vercel.app"
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
-app.use("/api/auth", authroutes);
-app.use("/api/images",Imageroutes)
+
 
 const server=http.createServer(app)
 const io = new Server(server, {
@@ -53,6 +58,11 @@ const io = new Server(server, {
     credentials: true
   }
 });
+
+
+app.use("/api/auth", authroutes);
+app.use("/api/images",Imageroutes)
+
 
 const Onlineusers=new Map()
 const lastSeen = new Map();
