@@ -12,18 +12,18 @@ function Signup() {
 
     try{
        const response = await fetch(
-  "http://localhost:8000/api/auth/signup",
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: username.trim(),
-      email: email.trim(),
-      password,
-    }),
-  }
+    `${import.meta.env.VITE_API_URL}/api/auth/signup`,
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: username.trim(),
+            email: email.trim(),
+            password,
+        }),
+    }
 );
         const data=await response.json();
           if (!response.ok) {

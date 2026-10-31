@@ -28,16 +28,16 @@ function Resetpass() {
     try {
       setLoading(true);
 
-      const response = await fetch(
-        `http://localhost:8000/api/auth/reset-password/${token}`,
-        {
-          method: "POST",
-          headers: {
+    const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/api/auth/reset-password/${token}`,
+    {
+        method: "POST",
+        headers: {
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ password }),
-        }
-      );
+        },
+        body: JSON.stringify({ password }),
+    }
+);
 
       const data = await response.json();
 
