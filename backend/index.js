@@ -1,4 +1,7 @@
 require("dotenv").config()
+const dns = require("dns");
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 const express=require("express")
 const mongoose=require("mongoose")
 
@@ -13,6 +16,8 @@ const Messages=require("./models/messages")
 const Pvtmessages=require("./models/privatemsg")
 const User=require("./models/user")
 const Imageroutes=require("./routes/imageroutes")
+const PORT = process.env.PORT || 8000;
+
 
 // const { socket } = require("../frontend/src/socket")
 
@@ -346,7 +351,7 @@ app.get("/api/private-messages/conversations/:username", async (req, res) => {
 
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/Chatdata")
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log("mongo db connected!");
     })
@@ -355,7 +360,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/Chatdata")
         console.log(error);
     });
 
-server.listen(8000,()=>{
+server.listen(PORT,()=>{
     console.log("server started on port 8000")
 })
 
